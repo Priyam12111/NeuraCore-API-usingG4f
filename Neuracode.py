@@ -13,7 +13,18 @@ def sendMsg(msg):
         return response.choices[0].message.content
     except Exception as e:
         print(f"An error occurred: {e}")
-
+def generateImage(msg):
+    try:
+        client = Client()
+        response = client.images.generate(
+            model="flux",
+            prompt=msg,
+        )
+        image_url = response.data[0].url
+        return image_url
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        
 
 if __name__ == "__main__":
     print(sendMsg("""How much water should I give to tulsi daily? (No Chinese)"""))
